@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ES2020",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["./src/*"],
+      "environment": ["./src/environment.ts"]
+    },
+    "types": ["vite/client", "vite-plugin-svgr/client"]
+  },
+  "exclude": ["node_modules"]
+}
