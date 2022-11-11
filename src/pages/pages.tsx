@@ -1,7 +1,7 @@
-import { AUTHENTICATION_ENABLED } from 'environment';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { AUTHENTICATION_ENABLED } from 'app/environment';
 import { useAuthentication } from 'app/hooks';
 import { CheckoutTemplate } from 'app/templates';
 

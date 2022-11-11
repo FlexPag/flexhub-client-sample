@@ -15,9 +15,9 @@ export const MakePaymentRequestSchema = z.object({
   }),
   card_request: z.object({
     card_number: z.string(),
-    holder: z.string(),
-    expiration_date: z.string(),
-    security_code: z.string(),
+    holder: z.string().optional(),
+    expiration_date: z.string().optional(),
+    security_code: z.string().optional(),
     brand: z.string(),
   }),
 });

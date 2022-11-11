@@ -1,4 +1,4 @@
-import { KEYCLOAK_TOKEN_ENDPOINT } from 'environment';
+import { KEYCLOAK_TOKEN_ENDPOINT } from 'app/environment';
 
 import { GetTokenRequest } from './get-token-request';
 import { GetTokenResponse, GetTokenResponseSchema } from './get-token-response';

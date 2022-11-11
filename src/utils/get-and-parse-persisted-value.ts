@@ -1,4 +1,4 @@
-import { IS_DEV } from 'environment';
+import { IS_DEV } from 'app/environment';
 import { ZodType, ZodTypeDef } from 'zod';
 
 import { AsParsedJSON } from 'app/shared';

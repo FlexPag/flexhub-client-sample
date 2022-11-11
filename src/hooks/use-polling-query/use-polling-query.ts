@@ -4,6 +4,8 @@ import { useRef } from 'react';
 export interface UsePollingQueryOptions<T> {
   pollingInterval: number;
   pollUntil: (data: T) => boolean;
+  onFinishedPolling?: (data: T) => void;
+  enabled?: boolean;
 }
 
 export function usePollingQuery<T>(
@@ -19,13 +21,19 @@ export function usePollingQuery<T>(
     refetchOnReconnect: () => polling.current.enabled,
     refetchIntervalInBackground: false,
     refetchInterval: () => (polling.current.enabled ? options.pollingInterval : false),
-    enabled: polling.current.enabled,
+    enabled: (typeof options.enabled === 'boolean' ? options.enabled : true) && polling.current.enabled,
 
     onSuccess: (data) => {
       const shouldStopPolling = options.pollUntil(data);
 
-      if (shouldStopPolling) {
-        polling.current = { enabled: false };
+      if (!shouldStopPolling) {
+        return;
+      }
+
+      polling.current = { enabled: false };
+
+      if (options.onFinishedPolling) {
+        options.onFinishedPolling(data);
       }
     },
   });

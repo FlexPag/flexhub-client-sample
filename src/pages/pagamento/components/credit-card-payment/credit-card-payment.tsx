@@ -2,7 +2,8 @@ import { useCallback } from 'react';
 import { Col, Row } from 'react-grid-system';
 import styled from 'styled-components';
 
-import { Button, Select, TextField } from 'app/components';
+import { Button, Collapse, Select, TextField } from 'app/components';
+import { PCI_ENABLED } from 'app/environment';
 import { PayerInfoEnteredCart, PendingPayment } from 'app/schemas';
 
 import { CreditCardInfo, useCreditCardForm } from './use-credit-card-form';
@@ -15,27 +16,28 @@ export interface CreditCardPaymentProps {
 }
 
 export function CreditCardPayment({ cart, onPaymentSuccess }: CreditCardPaymentProps) {
-  const form = useCreditCardForm();
   const installmentOptions = useInstallmentOptions(cart.orderInfo.installments);
 
   const handlePaymentSuccess = useCallback(() => {
     onPaymentSuccess({ type: 'credit-card' });
   }, [onPaymentSuccess]);
 
-  const payment = useMakePayment(handlePaymentSuccess);
+  const payment = useMakePayment({ onPaymentSuccess: handlePaymentSuccess });
+  const form = useCreditCardForm(payment.status === 'loading');
 
   const handleMakePayemnt = useCallback(
     (cardInfo: CreditCardInfo) => {
-      payment.pay({ cardInfo, orderInfo: cart.orderInfo });
+      if (payment.status === 'loading') {
+        return;
+      }
+
+      payment.pay({ cardInfo, cart, usePci: PCI_ENABLED });
     },
-    [payment.pay, cart.orderInfo]
+    [payment, cart.orderInfo]
   );
 
   return (
     <Container>
-      <div>
-        {JSON.stringify(Object.fromEntries(Object.entries(form.formState.errors).map(([k, p]) => [k, p.message])))}
-      </div>
       <form onSubmit={form.handleSubmit(handleMakePayemnt)}>
         <Row>
           <Col xs={12}>
@@ -64,8 +66,16 @@ export function CreditCardPayment({ cart, onPaymentSuccess }: CreditCardPaymentP
               style={{ marginBottom: '1rem', width: '100%' }}
             />
           </Col>
+          <Collapse isOpen={payment.status === 'error'}>
+            <ErrorMessage>
+              Não foi possível realizar o pagamento. <br />
+              Por favor, verifique os dados do cartão e tente novamente.
+            </ErrorMessage>
+          </Collapse>
           <Col xs={12}>
-            <Button type="submit">Pagar com cartão de crédito</Button>
+            <Button type="submit" disabled={payment.status === 'loading'}>
+              Pagar com cartão de crédito
+            </Button>
           </Col>
         </Row>
       </form>
@@ -76,4 +86,10 @@ export function CreditCardPayment({ cart, onPaymentSuccess }: CreditCardPaymentP
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ErrorMessage = styled.div`
+  color: ${({ theme }) => theme.colors.error};
+  padding: 1rem;
+  padding-top: 0;
 `;

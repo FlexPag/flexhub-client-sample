@@ -1,4 +1,4 @@
-import { FLEXPAG_TOKEN, IS_DEV, PIX_API } from 'environment';
+import { FLEXPAG_TOKEN, IS_DEV, PIX_API } from 'app/environment';
 
 import { MakePixPaymentRequest, MakePixPaymentRequestSchema } from './make-pix-payment-request';
 import { MakePixPaymentResponse, MakePixPaymentResponseSchema } from './make-pix-payment-response';

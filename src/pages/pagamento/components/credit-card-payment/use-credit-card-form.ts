@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 import { useZodForm } from 'app/hooks';
 
-export function useCreditCardForm() {
-  return useZodForm(CreditCardInfoSchema);
+export function useCreditCardForm(isDisabled: boolean) {
+  return useZodForm(CreditCardInfoSchema, { isDisabled });
 }
 
 const CreditCardInfoSchema = z.object({

@@ -1,4 +1,4 @@
-import { FLEXPAG_TOKEN, PAYMENT_API } from 'environment';
+import { FLEXPAG_TOKEN, PAYMENT_API } from 'app/environment';
 
 import { MakePaymentRequest, MakePaymentRequestSchema } from './make-payment-request';
 import { MakePaymentResponse, MakePaymentResponseSchema } from './make-payment-response';

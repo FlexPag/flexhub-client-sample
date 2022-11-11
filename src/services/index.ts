@@ -6,3 +6,4 @@ export * from './get-installments';
 export * from './get-ip';
 export * from './make-payment';
 export * from './make-pix-payment';
+export * from './make-pci-authorization';

@@ -1,4 +1,4 @@
-import { DEBTS_API } from 'environment';
+import { DEBTS_API } from 'app/environment';
 
 import { GetDebtsRequest, GetDebtsRequestSchema } from './get-debts-request';
 import { Debt, GetDebtsResponseSchema } from './get-debts-response';

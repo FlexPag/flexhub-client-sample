@@ -1,4 +1,4 @@
-import { FLEXPAG_TOKEN, TRANSACTION_STATUS_API } from 'environment';
+import { FLEXPAG_TOKEN, TRANSACTION_STATUS_API } from 'app/environment';
 
 import { GetTransactionStatusRequest, GetTransactionStatusRequestSchema } from './get-transaction-status-request';
 import { GetTransactionStatusResponse, GetTransactionStatusResponseSchema } from './get-transaction-status-response';

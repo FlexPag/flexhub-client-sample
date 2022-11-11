@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { KEYCLOAK_CLIENT_ID } from 'environment';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button, TextField } from 'app/components';
+import { KEYCLOAK_CLIENT_ID } from 'app/environment';
 import { useAuthentication } from 'app/hooks';
 import { getTokens } from 'app/services';
 

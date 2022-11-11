@@ -4,6 +4,7 @@ export const GetTransactionStatusResponseSchema = z.object({
   status: z.number(),
   message: z.string().nullish(),
   has_errors: z.boolean(),
+
   client: z.object({
     name: z.string().nullish(),
     document_type: z.string().nullish(),
@@ -31,6 +32,8 @@ export const GetTransactionStatusResponseSchema = z.object({
       name: z.string().nullish(),
     })
   ),
+
+  paymentReferenceId: z.string().nullish(),
 });
 
 export type GetTransactionStatusResponse = z.output<typeof GetTransactionStatusResponseSchema>;

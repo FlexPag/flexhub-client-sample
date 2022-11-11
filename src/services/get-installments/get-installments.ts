@@ -1,4 +1,4 @@
-import { FLEXPAG_TOKEN, INSTALLMENTS_API } from 'environment';
+import { FLEXPAG_TOKEN, INSTALLMENTS_API } from 'app/environment';
 import { z } from 'zod';
 
 import { GetInstallmentsRequestSchema } from './get-installments-request';
